@@ -2,12 +2,8 @@ class StoresController < ApplicationController
   # GET /stores
   # GET /stores.json
   def index
-    if params[:search].present?
-      @stores = Store.near(params[:search], 50, :order => :distance)
-    else
-      @stores = Store.all
-      @json = Store.all.to_gmaps4rails
-    end
+      @stores = Store.search(params[:search])
+      @json = Store.search(params[:search]).to_gmaps4rails
 
     #@stores = Store.all
     #@json = Store.all.to_gmaps4rails
